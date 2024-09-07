@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+</head>
+<h1>User Management</h1>
+<table border="1">
+    <tr>
+        <th>User ID</th>
+        <th>User Name</th>
+        <th>About</th>
+        <th>Email ID</th>
+        <th>URL</th>
+        <th>password</th>
+        <th>Action</th>
+    </tr>
+    {% for user in users %}
+    <tr>
+        <td>{{ user['usrid'] }}</td>
+        <td>{{ user['usr'] }}</td>
+        <td>{{ user['about'] }}</td>
+        <td>{{ user['mailid'] }}</td>
+        <td>{{ user['url'] }}</td>
+        <td>{{ user['password'] }}</td>
+
+        <td>
+            <form action="/delete_user/{{ user['usrid'] }}" method="post">
+                <button type="submit">Delete</button>
+            </form>
+            <a href="/edit_url/{{ user['usrid'] }}">Edit URL</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h1>Comment Management</h1>
+<table border="1">
+    <tr>
+        <th>Message ID</th>
+        <th>Comments</th>
+        <th>User ID</th>
+        <th>Action</th>
+    </tr>
+    {% for comment in comments %}
+    <tr>
+        <td>{{ comment['messageid'] }}</td>
+        <td>{{ comment['comments'] }}</td>
+        <td>{{ comment['usrid'] }}</td>
+        <td>
+            <form action="/delete_comment/{{ comment['messageid'] }}" method="post">
+                <button type="submit">Delete</button>
+            </form>
+            <a href="/edit_comment/{{ comment['messageid'] }}">Edit Comment</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+    <h1>Tweet Management</h1>
+    <table border="1">
+        <tr>
+            <th>Message ID</th>
+            <th>User ID</th>
+            <th>Message</th>
+            <th>Date</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        {% for tweet in tweets %}
+        <tr>
+            <td>{{ tweet['messageId'] }}</td>
+            <td>{{ tweet['usrid'] }}</td>
+            <td>{{ tweet['msg'] }}</td>
+            <td>{{ tweet['date'] }}</td>
+            <td>
+                <a href="/edit_tweet/{{ tweet['messageId'] }}">Edit</a>
+            </td>
+            <td>
+                <form action="/delete_tweet/{{ tweet['messageId'] }}" method="post">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

@@ -1,0 +1,55 @@
+
+                
+                <a href='/home/{{usrid}}' class="text-white" style="text-decoration:none">
+                  <img class="mt-3 spacer" src="{{url_for('static', filename='./images/logo.png')}}" width="32" />
+                </a>
+                <a href='/home/{{usrid}}' class="text-white" style="text-decoration:none">
+                  <div class="container mt-3 buttonBg  py-2 " style="margin-left:100px">
+                    <img src="{{url_for('static', filename='./images/home.png')}}" style="width:25px;" class="invert" />
+                    <p class="ml-3" style="display:inline;">Home</p>
+                  </div>
+                </a>
+                <div class="container mt-2 buttonBg  py-2" style="margin-left:100px">
+                  <img src="{{url_for('static', filename='./images/hashTag.png')}}" style="width:28px;" class="invert" />
+                  <p class="ml-3" style="display:inline;"> Explore </p>
+                </div>
+                <div class="container mt-2 buttonBg  py-2" style="margin-left:100px">
+                  <img src="{{url_for('static', filename='./images/bell.png')}}" style="width:28px;" class="invert" />
+                  <p class="ml-3" style="display:inline;"> Notification </p>
+                </div>
+                <a href='/messages/{{usrid}}' class="text-white" style="text-decoration:none">
+                  <div class="container mt-2 buttonBg  py-2" style="margin-left:100px">
+                    <img src="{{url_for('static', filename='./images/mail.png')}}" style="width:28px;" class="invert" />
+                    <p class="ml-3" style="display:inline;"> Messages </p>
+                  </div>
+                </a>
+                <a href='/bookmarks/{{usrid}}' class="text-white" style="text-decoration:none">
+                  <div class="container mt-2 buttonBg  py-2" style="margin-left:100px">
+                    <img src="{{url_for('static', filename='./images/bookmarks.png')}}" style="width:28px;" class="invert" />
+                    <p class="ml-3" style="display:inline;"> Bookmarks </p>
+                  </div>
+                </a>
+                <div class="container mt-2 buttonBg  py-2" style="margin-left:100px">
+                  <img src="{{url_for('static', filename='./images/lists.png')}}" style="width:28px;" class="invert" />
+                  <p class="ml-3" style="display:inline;"> Lists </p>
+                </div>
+                <a href='/profile/{{usrid}}' class="text-white" style="text-decoration:none">
+                  <div class="container mt-2 buttonBg  py-2" style="margin-left:100px">
+                    <img src="{{url_for('static', filename='./images/profile.png')}}" style="width:28px;" class="invert" />
+                    <p class="ml-3" style="display:inline;"> Profile </p>
+                  </div>
+                </a>
+                <div class="container mt-2 buttonBg  py-2" style="margin-left:100px">
+                  <img src="{{url_for('static', filename='./images/more.png')}}" style="width:28px;" class="invert" />
+                  <p class="ml-3" style="display:inline;"> More </p>
+                </div>
+                <a href='/home/{{usrid}}' style="text-decoration:none" id="homea">
+                  <button class=" text-white btnsize1 primary mt-3 mr-5 float-right  py-2" id="homebtn">Tweet</button>
+                </a>
+                <a href='/profile/{{usrid}}' class="text-white" style="text-decoration:none">
+                  <div class="container buttonBg  py-2" style="margin-left:100px;margin-top:150px">
+                    <img src="{{loc}}" style="border-radius:100px;" width="45" />
+                    <p class="ml-1" style="display:inline;"> {{usrname}} </p>
+                    <img class="invert ml-5" src="{{url_for('static', filename='./images/dots.png')}}" style="border-radius:100px;" width="30" />
+                  </div>
+                </a>

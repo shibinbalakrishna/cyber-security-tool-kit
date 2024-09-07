@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width">
+      <title>Cyblog</title>
+      <link rel="shortcut icon" type="image/png" href="../static/dist/main/images/logos/favicon.png" />
+      
+      <link href="{{url_for('static', filename='./style.css')}}" rel="stylesheet" type="text/css" />
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@500&family=Open+Sans&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+   </head>
+   <body class="theme text-white" >
+      <div class="container-fluid">
+      <div class="row">
+         <div class="col-md-3 size theme  border-dark font">
+           {% include 'Side.html' %}
+         </div>
+         <div class="col-md-5 theme border-left border-right border-dark" style="margin-left:100px; height: 740px;">
+            <div class="container-fluid border-bottom border-dark" style="height:160px;">
+               <h5 class="mt-3 mb-4" >Home</h5>
+               <img src="{{loc}}" style="border-radius:100px;"width="55"/>
+               <input id="tweet" class="ml-2 theme " placeholder="What's Happening? {{session['name']}}" >
+              
+               <button id="post" class=" text-white btnsize2 primary mt-2 float-right  py-2" onclick="postMessage()">Post</button>
+            </div>
+            <div class="container scrollView"  onload="func()" id="scroller">
+               {% for val in data %}
+               <div class="container mt-2 bg-dark py-3 text-white fix"  style="border-radius:15px;" id="a{{val[0]}}">
+                  <div class="row">
+                     <div class="col-md-1">
+                        <img src="{{val[6]}}" style="border-radius:100px;"width="50"/>
+                     </div>
+                     <div class="col-md-9 ">
+                        <strong>
+                          
+                           <p style="display:inline" class="ml-3">{{val[5]}}</p>
+                        </strong>
+                        <p class="ml-3 text-light" style="font-size:15px;">{{val[1]}}</p>
+                     </div>
+                     <div class="col-md-2 " style="font-size:15px;">
+                        {{val[3]}} 
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-md-1"></div>
+                     <div class="col-md-9" style="word-wrap: break-word;">
+                       <p class="ml-3">
+                        {{val[2]}}
+                       </p>
+                     </div>
+                     <div class="col-md-2">
+                      
+                         {% if val[4] == 1 %}
+                          <img class="invert btnmsg" src="{{url_for('static', filename='./images/bookmarksFull.png')}}" style="margin-left:10px; padding:10px 10px 10px 10px;" width="33" onclick="bookmarkEntry(`{{val[1]}}`,{{val[0]}},0,'main')" id="{{val[0]}}"/>
+                        {% endif %}
+                        {% if val[4] == 0 %}
+                          <img class="invert btnmsg" src="{{url_for('static', filename='./images/bookmarks.png')}}" style="margin-left:10px; padding:10px 10px 10px 10px;" width="33" onclick="bookmarkEntry(`{{val[1]}}`,{{val[0]}},1,'main')" id="{{val[0]}}"/>
+                        {% endif %}
+                     </div>
+                  </div>
+<!-- like commment retweet starts -->
+                 <div class="row" id="crs{{val[0]}}">
+                   <div class="col-md-1"></div>
+                   <div class="col-md-2 btnmsg d-fluid" style="margin-top:2px;">
+                    {% if val[8] == 1 %}
+                     <img  src="/static/./images/likeFull.png" style="margin-left:10px;"width="20" onclick="like('l{{val[0]}}')" id="l{{val[0]}}">
+                    {% endif %}
+                    {% if val[8] == 0 %}
+                     <img  src="/static/./images/like.png" style="margin-left:10px;"width="20" onclick="like('l{{val[0]}}')" id="l{{val[0]}}">
+                    {% endif %}
+                     <p style="display:inline;margin-left:10px;" ><span id="m{{val[0]}}">{{val[7]}}</span></p>
+                     </div>
+                   
+                    <!-- <div class="col-md-2 btnmsg py-1">
+                      {% if val[10] == 1 %}
+                       <img class="invert" src="/static/./images/retweetFull.png"style="margin-left:10px;margin-top:-5px;" width="20" onclick="retweet('rb{{val[0]}}')" id="rb{{val[0]}}">
+                      {% endif %}
+                      {% if val[10] == 0 %}
+                       <img class="invert" src="/static/./images/retweet.png"style="margin-left:10px;margin-top:-5px;" width="20" onclick="retweet('rb{{val[0]}}')" id="rb{{val[0]}}">
+                      {% endif %}
+                      <p style="display:inline;margin-left:10px;" ><span id="rc{{val[0]}}">{{val[9]}}</span></p>
+                   </div> -->
+                   <div class="col-md-2 btnmsg py-1">
+                     
+                     <img src="/static/./images/comment.png" width="20" onclick="comments('cb{{val[0]}}','{{loc}}')"  id="cb{{val[0]}}"style="margin-left:10px;">
+                    <p style="display:inline;margin-left:10px;" ><span id="cc{{val[0]}}">{{val[11]}}</span></p>
+                   </div>
+                 </div>
+<!-- like commment retweet ends -->
+                 
+<!-- comments start -->
+                 <div class="row" >
+                   <div class="container" id="co{{val[0]}}">
+                   </div>
+                 </div>
+<!-- comments end -->
+               </div>
+               {% endfor %}
+            </div>
+         </div>
+         <div class="col-md-4 theme mt-4">{% include 'side1.html' %}</div>
+         <!--  -->
+      </div>
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+      <script>
+    //  window.setInterval( function() {
+    //   if(document.getElementById('scroller').scrollTop<=120){
+    //     $("#scroller").load(location.href + " #scroller");
+    //   }
+    // }, 10000);
+       
+       document.getElementById('homea').setAttribute("href","javascript:void(0)");
+        
+        document.getElementById("homebtn").onclick = focus;
+        function focus(){
+          document.getElementById("tweet").focus();
+        }
+       
+        
+      </script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+      
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+      <script src="{{url_for('static', filename='./script.js')}}"></script>
+        <script src="{{url_for('static', filename='./like.js')}}"></script>
+   </body>
+</html>

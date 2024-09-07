@@ -1,0 +1,21 @@
+
+<div class="container bg-dark py-4" style="border-radius:25px;height: 730px; ">
+      <div class="row" style="background-color:#1DA1F2">
+       <h1 class="mt-1 ml-4">Headlines...</h1>
+      </div>
+    <div class="row scrollView" style="height:350px">
+    {% for val in news %}
+    <div class="container border-bottom border-secondary">
+      <div class="row  py-1 ">
+        <div class="mt-1 ml-4 container">
+          <a href='{{val[1]}}'target="_blank" class="text-white" style="text-decoration:none">
+          <p  style="font-size:15px;">{{val[0]}}</p></a>
+        </div>
+      <div>
+    </div>
+    </div>
+   </div>
+    {% endfor %}
+</div>
+</div>
+                    

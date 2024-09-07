@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title></title>
+  <link rel="shortcut icon" type="image/png" href="../static/dist/main/images/logos/favicon.png" />
+  <link href="{{url_for('static', filename='./style.css')}}" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+<body class="theme">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6">
+        <img src="{{url_for('static', filename='./images/TwitterLoginLeft.png')}}"   style="margin-top: 30px;" width="600"/>
+      </div>
+      <div class="col-md-6 ">
+        
+        <strong><h1 class="thicker text-white "style="margin-top:65px;margin-left:35px; font-family:'Source Sans Pro', sans-serif; font-size:70px">Welcome Back</h1></strong>
+        <!-- <strong><h1 class="thicker text-white "style="margin-top:60px;margin-left:80px; font-family:'Source Sans Pro', sans-serif; font-size:35px">join with us</h1></strong> -->
+        <button style="margin-top:60px;margin-left:80px;font-family:'Source Sans Pro', sans-serif;width:300px;border-radius:25px;"class="btn btn-white text-black bd" data-toggle="modal" data-target="#signin" >Login</button>
+        <br>
+        <br>
+        <button style="margin-top:10px;margin-left:80px;font-family:'Source Sans Pro', sans-serif;width:300px;border-radius:25px;"class="btn btn-white text-black" data-toggle="modal" data-target="#signup">Sign up</button>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade " id="signin" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header ">
+        <h5 class="modal-title" id="exampleModalLongTitle">Sign in</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+         <form name="loginForm" class="formStyle" onsubmit="ValidateFormSignIn()">
+          <label for="userid">
+            <b>User Id</b>
+          </label><br>
+          <input type="text" name="userid" placeholder="Samp@123" class="border width" required>
+          </input><br><br>
+          <label for="password">
+            <b>Password</b>
+          </label><br>
+          <input type="password" name="password" class="border width" required>
+          </input><br>
+          <p id="error" style="color:red">&nbsp;
+          <p>
+            
+          </b>
+    </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onClick="ValidateFormSignIn()">login</button>
+      </div>
+    </div>
+  </div>
+</div>
+  <div class="modal fade " id="signup" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header ">
+        <h5 class="modal-title" id="exampleModalLongTitle">Sign up</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <img class="brand_logo bg-dark" id="output" width="130" />
+        
+        
+       <form id="signUPForm" name="signUPForm" class="formStyle">
+        <input name="file" accept="image/*" type="file" onchange="loadFile(event)" required>
+        <br><br>
+        <label for="usrid"> 
+          <b>UserId</b>
+        </label><br>
+        <input type="text" name="usrid" placeholder="sample" class="border width" required>
+        </input><br><br>
+        <label for="usr"> 
+          <b>User Name</b>
+        </label><br>
+        <input type="text" name="usr" placeholder="sample" class="border width" required>
+        </input><br><br>
+        <label for="mailId">
+          <b>Mail Id</b>
+        </label><br>
+        <input type="email" name="mailId" placeholder="Samp@gmail.com" class="border width" required>
+        </input><br><br>
+        <label for="password">
+          <b>Password</b>
+        </label><br>
+        <input type="password" name="password" class="border width" required>
+        </input><br>
+        <p id="error1" style="color:red">&nbsp;<p>
+          
+        </b>
+    </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onClick="ValidateFormSignUp()">Register</button>
+      </div>
+    </div>
+  </div>
+</div>
+ <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+
+  <script src="{{url_for('static', filename='./login.js')}}"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@700&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
